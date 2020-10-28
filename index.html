@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Campo minato</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Gioca a campo minato</h1>
+      <h3>
+        Devi inserire un numero alla volta e provare ad arrivare al massimo
+        punteggio! Attento... Alcuni numeri sono corrotti!
+      </h3>
+      <h3>Scegli la difficolta:</h3>
+      <h3 id="easy">Facile: Il computer genererà 16 numeri da 1 a 100</h3>
+      <h3 id="medium">Media: Il computer genera 16 numeri casuali da 1 a 80</h3>
+      <h3 id="hard">
+        Difficile: Il computer genera 16 numeri casuali da 1 a 50
+      </h3>
+
+      <div id="scorebox" class="scorebox">
+        <div id="scoreResult">0</div>
+        <div id="title" class="title">Inserisci un numero e sfida la sorte...</div>
+        <input id="numberInput" type="text"  />
+        <button id="pushNum">Tenta la sorte</button>
+      </div>
+    </div>
+  </body>
+</html>
