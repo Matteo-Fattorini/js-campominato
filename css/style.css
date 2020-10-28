@@ -60,7 +60,7 @@ h3 {
   font-size: 5rem;
   height: 100px;
   line-height: 100px;
-  padding: 0 10px;
+  padding: 0 20px;
   border: 3px solid var(--red);
   position: absolute;
   left: 0;
@@ -79,13 +79,14 @@ h3 {
   color: white;
   position: absolute;
   top: 50%;
+  padding: 0, 20px;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--lightblack);
   border-color: var(--red);
   line-height: 50px;
   height: 100px;
-  width: 100px;
+  width: 150px;
 }
 
 #pushNum {

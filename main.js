@@ -31,16 +31,27 @@ function getRandomInt(min, max) {
 }
 
 //!funzione per generare 16 numeri
-function randomNumList(rangeMin, rangeMax) {
-  var randomNumbers = [];
-  var setRandomNumbers = new Set();
-  while (setRandomNumbers.size < 16) {
-    randomNumbers.push(getRandomInt(rangeMin, rangeMax));
-    setRandomNumbers = new Set(randomNumbers);
-  }
-  return Array.from(setRandomNumbers);
-}
+// function randomNumList(rangeMin, rangeMax) {
+//   var randomNumbers = [];
+//   var setRandomNumbers = new Set();
+//   while (setRandomNumbers.size < 16) {
+//     randomNumbers.push(getRandomInt(rangeMin, rangeMax));
+//     setRandomNumbers = new Set(randomNumbers);
+//   }
+//   return Array.from(setRandomNumbers);
+// }
 
+function randomNumList(rangeMin, rangeMax) {
+  var arr = [];
+
+  while (arr.length < 16) {
+    var r = getRandomInt(rangeMin, rangeMax);
+    if (arr.indexOf(r) === -1) {
+      arr.push(r);
+    }
+  }
+  return arr;
+}
 
 //!funzione per vedere se il numero è presente nella lista del pc
 
