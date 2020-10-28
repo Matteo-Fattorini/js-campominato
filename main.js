@@ -41,6 +41,7 @@ function randomNumList(rangeMin, rangeMax) {
   return Array.from(setRandomNumbers);
 }
 
+
 //!funzione per vedere se il numero è presente nella lista del pc
 
 function isPresent(num1, array) {
@@ -58,6 +59,9 @@ var COUNTER = 0;
 easyCheck = false;
 mediumCheck = false;
 hardCheck = false;
+TOPEASYSCORE = "4200";
+TOPHARDSCORE = "1700";
+TOPMEDIUMSCORE = "3200";
 
 //!difficoltà facile
 easyDiffEl.addEventListener("click", function () {
@@ -100,13 +104,13 @@ hardDiffEl.addEventListener("click", function () {
 pushNumBtnEl.addEventListener("click", function () {
   //!controlliamo che non abbia vinto
 
-  if (easyCheck && SCORE.toString() == "4200") {
+  if (easyCheck && SCORE.toString() == TOPEASYSCORE) {
     alert("HAI COMPLETATO IL GIOCO!!");
   }
-  if (hardCheck && SCORE.toString() == "1700") {
+  if (hardCheck && SCORE.toString() == TOPHARDSCORE) {
     alert("HAI COMPLETATO IL GIOCO!!");
   }
-  if (mediumCheck && SCORE.toString() == "3200") {
+  if (mediumCheck && SCORE.toString() == TOPMEDIUMSCORE) {
     alert("HAI COMPLETATO IL GIOCO!!");
   }
   console.log(easyCheck);
@@ -130,7 +134,33 @@ pushNumBtnEl.addEventListener("click", function () {
     SCORE -= 50;
   }
 
+  //! controlliamo che il numero che inserisce sia nel giusto range
+
+  if (
+    (easyCheck && numberInputEl.value < 1) ||
+    (easyCheck && numberInputEl.value > 100)
+  ) {
+    alert("Inserisci un numero da 1 a 100");
+    SCORE -= 50;
+  }
+  if (
+    (mediumCheck && numberInputEl.value < 1) ||
+    (mediumCheck && numberInputEl.value > 80)
+  ) {
+    alert("Inserisci un numero da 1 a 80");
+    SCORE -= 50;
+  }
+  if (
+    (hardCheck && numberInputEl.value < 1) ||
+    (hardCheck && numberInputEl.value > 50)
+  ) {
+    alert("Inserisci un numero da 1 a 50");
+    SCORE -= 50;
+  }
+
   console.log(computerPicks);
+
+  //!processiamo i dati
 
   if (computerPicks.includes(parseInt(numberInputEl.value))) {
     lost = true;
@@ -146,7 +176,3 @@ pushNumBtnEl.addEventListener("click", function () {
     scoreResultEl.innerHTML = SCORE;
   }
 });
-
-// verifichiamo che non abbia perso o vinto il gioco
-
-
