@@ -11,6 +11,11 @@
 // con difficoltà 1 =>  tra 1 e 80
 // con difficoltà 2 => tra 1 e 50
 
+
+
+//coded on 28/10/2020
+//coded by Matteo Fattorini
+
 //!elements
 
 scoreResultEl = document.getElementById("scoreResult");
@@ -22,29 +27,33 @@ hardDiffEl = document.getElementById("hard");
 scoreBoxEl = document.getElementById("scorebox");
 titleEl = document.getElementById("title");
 
+//!variabili generiche
+
+var USERPICKS = [];
+var PICKNUMB = 16;
+var lost = false;
+var SCORE = 0;
+var COUNTER = 0;
+easyCheck = false;
+mediumCheck = false;
+hardCheck = false;
+TOPEASYSCORE = "4200";
+TOPMEDIUMSCORE = "3200";
+TOPHARDSCORE = "1700";
+
 //!functions
 
 // !funzione per creare un numero random
 
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(Math.random() * (max - min)) + min + 1;
 }
 
 //!funzione per generare 16 numeri
-// function randomNumList(rangeMin, rangeMax) {
-//   var randomNumbers = [];
-//   var setRandomNumbers = new Set();
-//   while (setRandomNumbers.size < 16) {
-//     randomNumbers.push(getRandomInt(rangeMin, rangeMax));
-//     setRandomNumbers = new Set(randomNumbers);
-//   }
-//   return Array.from(setRandomNumbers);
-// }
 
 function randomNumList(rangeMin, rangeMax) {
   var arr = [];
-
-  while (arr.length < 16) {
+  while (arr.length < PICKNUMB) {
     var r = getRandomInt(rangeMin, rangeMax);
     if (arr.indexOf(r) === -1) {
       arr.push(r);
@@ -61,23 +70,10 @@ function isPresent(num1, array) {
   return toggle;
 }
 
-//!variabili generiche
-
-var USERPICKS = [];
-var lost = false;
-var SCORE = 0;
-var COUNTER = 0;
-easyCheck = false;
-mediumCheck = false;
-hardCheck = false;
-TOPEASYSCORE = "4200";
-TOPHARDSCORE = "1700";
-TOPMEDIUMSCORE = "3200";
-
 //!difficoltà facile
 easyDiffEl.addEventListener("click", function () {
   easyCheck = true;
-  computerPicks = randomNumList(1, 101);
+  computerPicks = randomNumList(1, 100);
   scoreBoxEl.style.display = "block";
   mediumDiffEl.style.display = "none";
   hardDiffEl.style.display = "none";
@@ -90,7 +86,7 @@ easyDiffEl.addEventListener("click", function () {
 
 mediumDiffEl.addEventListener("click", function () {
   mediumCheck = true;
-  computerPicks = randomNumList(1, 81);
+  computerPicks = randomNumList(1, 80);
   scoreBoxEl.style.display = "block";
   easyDiffEl.style.display = "none";
   hardDiffEl.style.display = "none";
@@ -103,7 +99,7 @@ mediumDiffEl.addEventListener("click", function () {
 
 hardDiffEl.addEventListener("click", function () {
   hardCheck = true;
-  computerPicks = randomNumList(1, 51);
+  computerPicks = randomNumList(1, 50);
   scoreBoxEl.style.display = "block";
   easyDiffEl.style.display = "none";
   mediumDiffEl.style.display = "none";
@@ -115,16 +111,13 @@ hardDiffEl.addEventListener("click", function () {
 pushNumBtnEl.addEventListener("click", function () {
   //!controlliamo che non abbia vinto
 
-  if (easyCheck && SCORE.toString() == TOPEASYSCORE) {
+  if (
+    (easyCheck && SCORE.toString() == TOPEASYSCORE) ||
+    (hardCheck && SCORE.toString() == TOPHARDSCORE) ||
+    (mediumCheck && SCORE.toString() == TOPMEDIUMSCORE)
+  ) {
     alert("HAI COMPLETATO IL GIOCO!!");
   }
-  if (hardCheck && SCORE.toString() == TOPHARDSCORE) {
-    alert("HAI COMPLETATO IL GIOCO!!");
-  }
-  if (mediumCheck && SCORE.toString() == TOPMEDIUMSCORE) {
-    alert("HAI COMPLETATO IL GIOCO!!");
-  }
-  console.log(easyCheck);
 
   //!controlliamo che non abbia perso
 
@@ -133,6 +126,7 @@ pushNumBtnEl.addEventListener("click", function () {
   }
 
   //! controlliamo che non abbia già inserito il numero
+
   if (USERPICKS.includes(numberInputEl.value)) {
     alert("hai già inserito questo numero");
     SCORE -= 50;
