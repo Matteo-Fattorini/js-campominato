@@ -12,9 +12,11 @@
 // con difficoltà 2 => tra 1 e 50
 
 
+/**
+ * @author Matteo Fattorini 
+ * coded on 28/10/2020
+ */
 
-//coded on 28/10/2020
-//coded by Matteo Fattorini
 
 //!elements
 
@@ -43,17 +45,26 @@ TOPHARDSCORE = "1700";
 
 //!functions
 
-// !funzione per creare un numero random
+/**
+ * questa funzione serve a generare un numero random compreso fra due valori
+ * @param {number} min è il valore minimo, compreso
+ * @param {number} max è il valore massimo, compreso
+ */
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min + 1;
 }
 
-//!funzione per generare 16 numeri
+/**
+ * Funzione che crea un array di x numeri random unici
+ * @param {number} rangeMin minimo numero compreso
+ * @param {number} rangeMax ultimo numero compreso
+ * @param {number} elements numero di elementi
+ */
 
-function randomNumList(rangeMin, rangeMax) {
+function randomNumList(rangeMin, rangeMax, elements) {
   var arr = [];
-  while (arr.length < PICKNUMB) {
+  while (arr.length < elements) {
     var r = getRandomInt(rangeMin, rangeMax);
     if (arr.indexOf(r) === -1) {
       arr.push(r);
@@ -62,18 +73,11 @@ function randomNumList(rangeMin, rangeMax) {
   return arr;
 }
 
-//!funzione per vedere se il numero è presente nella lista del pc
-
-function isPresent(num1, array) {
-  var toggle = false;
-  if (array.includes(num1)) toggle = true;
-  return toggle;
-}
 
 //!difficoltà facile
 easyDiffEl.addEventListener("click", function () {
   easyCheck = true;
-  computerPicks = randomNumList(1, 100);
+  computerPicks = randomNumList(1, 100 ,PICKNUMB);
   scoreBoxEl.style.display = "block";
   mediumDiffEl.style.display = "none";
   hardDiffEl.style.display = "none";
@@ -86,7 +90,7 @@ easyDiffEl.addEventListener("click", function () {
 
 mediumDiffEl.addEventListener("click", function () {
   mediumCheck = true;
-  computerPicks = randomNumList(1, 80);
+  computerPicks = randomNumList(1, 80,PICKNUMB);
   scoreBoxEl.style.display = "block";
   easyDiffEl.style.display = "none";
   hardDiffEl.style.display = "none";
@@ -99,7 +103,7 @@ mediumDiffEl.addEventListener("click", function () {
 
 hardDiffEl.addEventListener("click", function () {
   hardCheck = true;
-  computerPicks = randomNumList(1, 50);
+  computerPicks = randomNumList(1, 50,PICKNUMB);
   scoreBoxEl.style.display = "block";
   easyDiffEl.style.display = "none";
   mediumDiffEl.style.display = "none";
