@@ -19,7 +19,6 @@ body {
 }
 
 .container {
-  padding: 100px;
   text-align: center;
 }
 
@@ -50,10 +49,11 @@ h3 {
   background-color: var(--lightblack);
   border: 1px solid var(--red);
   margin: 70px auto;
-  width: 80%;
-  min-height: 500px;
+  width: 100%;
+
   position: relative;
   display: none;
+  padding: 50px 0;
 }
 
 #scoreResult {
@@ -65,47 +65,11 @@ h3 {
   position: absolute;
   left: 0;
   top: 0;
-  
 }
 
 .title {
   font-size: 2rem;
   margin-top: 10px;
-}
-
-#numberInput {
-  text-align: center;
-  font-size: 4rem;
-  color: white;
-  position: absolute;
-  top: 50%;
-  padding: 0, 20px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--lightblack);
-  border-color: var(--red);
-  line-height: 50px;
-  height: 100px;
-  width: 150px;
-}
-
-#pushNum {
-  color: white;
-  background-color: var(--lightblack);
-  border-color: var(--red);
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40%;
-  padding: 10px;
-  font-size: 1.7rem;
-  border-radius: 5px;
-}
-
-#pushNum:hover {
-  opacity: 0.7;
-  cursor: pointer;
 }
 
 #easy:hover {
@@ -118,4 +82,45 @@ h3 {
 
 #hard:hover {
   color: var(--red);
+}
+
+.minebox {
+  min-width: calc(100% / 10);
+  height: 50px;
+
+  background-color: grey;
+}
+
+.minebox:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.mineField {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  column-gap: 5px;
+  row-gap: 5px;
+  padding-top: 100px;
+  width: 50%;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  margin: auto;
+}
+
+@media screen and (max-width: 450px) {
+  html {
+    font-size: 0.5rem;
+  }
+
+  .mineField {
+    width: 100%;
+    margin: 0;
+    padding-top: 50px;
+  }
+
+  .scorebox {
+    margin: 0;
+  }
 }

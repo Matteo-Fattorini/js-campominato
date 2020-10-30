@@ -11,12 +11,10 @@
 // con difficoltà 1 =>  tra 1 e 80
 // con difficoltà 2 => tra 1 e 50
 
-
 /**
- * @author Matteo Fattorini 
+ * @author Matteo Fattorini
  * coded on 28/10/2020
  */
-
 
 //!elements
 
@@ -28,6 +26,8 @@ mediumDiffEl = document.getElementById("medium");
 hardDiffEl = document.getElementById("hard");
 scoreBoxEl = document.getElementById("scorebox");
 titleEl = document.getElementById("title");
+wrapperEl = document.getElementById("wrapper");
+mineFieldEl = document.getElementById("mineField");
 
 //!variabili generiche
 
@@ -73,15 +73,62 @@ function randomNumList(rangeMin, rangeMax, elements) {
   return arr;
 }
 
+//Cell generator
+
+function createMinebox(n) {
+  for (var i = 0; i <= n; i++) {
+    var newBox = document.createElement("div");
+    newBox.className = "minebox";
+    newBox.value = i;
+    mineFieldEl.appendChild(newBox);
+  }
+}
+
+/**
+ * funzione che si occupa di gestire il gioco
+ * caselle verdi se numero sicuro, altrimenti rosse e finisce il gioco
+ */
+
+function playGame() {
+  scoreResultEl.innerHTML = 0;
+  mineClass = document.getElementsByClassName("minebox");
+  for (var i = 0; i < mineClass.length; i++) {
+    mineClass[i].addEventListener("click", function (event) {
+      if (lost) {
+        alert("hai perso");
+      } else {
+        if (computerPicks.includes(event.target.value)) {
+          event.target.style.backgroundColor = "red";
+
+          alert("hai perso :( ");
+          lost = true;
+          for (var i = 0; i < mineClass.length; i++) {
+            if (computerPicks.includes(mineClass[i].value)) {
+              mineClass[i].style.backgroundColor = "red";
+            }
+          }
+        } else {
+          event.target.style.backgroundColor = "green";
+          SCORE += 50;
+          scoreResultEl.innerHTML = SCORE;
+        }
+      }
+    });
+  }
+}
 
 //!difficoltà facile
+
 easyDiffEl.addEventListener("click", function () {
-  easyCheck = true;
-  computerPicks = randomNumList(1, 100 ,PICKNUMB);
+  computerPicks = randomNumList(1, 100, PICKNUMB);
+  createMinebox(99);
+  playGame();
+  wrapperEl.style.display = "none";
   scoreBoxEl.style.display = "block";
   mediumDiffEl.style.display = "none";
+  easyDiffEl.style.display = "none";
   hardDiffEl.style.display = "none";
-  easyDiffEl.innerHTML = "FACILE";
+  titleEl.innerHTML = "FACILE";
   easyDiffEl.style.fontSize = "2.5rem";
   easyDiffEl.style.color = "green";
 });
@@ -89,12 +136,15 @@ easyDiffEl.addEventListener("click", function () {
 //!difficoltà media
 
 mediumDiffEl.addEventListener("click", function () {
-  mediumCheck = true;
-  computerPicks = randomNumList(1, 80,PICKNUMB);
+  computerPicks = randomNumList(1, 80, PICKNUMB);
+  createMinebox(79);
+  playGame();
+  wrapperEl.style.display = "none";
   scoreBoxEl.style.display = "block";
+  mediumDiffEl.style.display = "none";
   easyDiffEl.style.display = "none";
   hardDiffEl.style.display = "none";
-  mediumDiffEl.innerHTML = "MEDIO";
+  titleEl.innerHTML = "MEDIO";
   mediumDiffEl.style.fontSize = "2.5rem";
   mediumDiffEl.style.color = "tomato";
 });
@@ -102,86 +152,15 @@ mediumDiffEl.addEventListener("click", function () {
 // !difficoltà difficile
 
 hardDiffEl.addEventListener("click", function () {
-  hardCheck = true;
-  computerPicks = randomNumList(1, 50,PICKNUMB);
+  computerPicks = randomNumList(1, 50, PICKNUMB);
+  createMinebox(49);
+  playGame();
+  wrapperEl.style.display = "none";
   scoreBoxEl.style.display = "block";
-  easyDiffEl.style.display = "none";
   mediumDiffEl.style.display = "none";
-  hardDiffEl.innerHTML = "DIFFICILE";
+  easyDiffEl.style.display = "none";
+  hardDiffEl.style.display = "none";
+  titleEl.innerHTML = "DIFFICILE";
   hardDiffEl.style.fontSize = "2.5rem";
   hardDiffEl.style.color = "red";
-});
-
-pushNumBtnEl.addEventListener("click", function () {
-  //!controlliamo che non abbia vinto
-
-  if (
-    (easyCheck && SCORE.toString() == TOPEASYSCORE) ||
-    (hardCheck && SCORE.toString() == TOPHARDSCORE) ||
-    (mediumCheck && SCORE.toString() == TOPMEDIUMSCORE)
-  ) {
-    alert("HAI COMPLETATO IL GIOCO!!");
-  }
-
-  //!controlliamo che non abbia perso
-
-  if (lost) {
-    alert("Hai perso! Premi F5 per riprovare!");
-  }
-
-  //! controlliamo che non abbia già inserito il numero
-
-  if (USERPICKS.includes(numberInputEl.value)) {
-    alert("hai già inserito questo numero");
-    SCORE -= 50;
-  }
-
-  //! controlliamo che abbia inserito un numero
-
-  if (isNaN(numberInputEl.value)) {
-    alert("Non hai inserito un numero!");
-    SCORE -= 50;
-  }
-
-  //! controlliamo che il numero che inserisce sia nel giusto range
-
-  if (
-    (easyCheck && numberInputEl.value < 1) ||
-    (easyCheck && numberInputEl.value > 100)
-  ) {
-    alert("Inserisci un numero da 1 a 100");
-    SCORE -= 50;
-  }
-  if (
-    (mediumCheck && numberInputEl.value < 1) ||
-    (mediumCheck && numberInputEl.value > 80)
-  ) {
-    alert("Inserisci un numero da 1 a 80");
-    SCORE -= 50;
-  }
-  if (
-    (hardCheck && numberInputEl.value < 1) ||
-    (hardCheck && numberInputEl.value > 50)
-  ) {
-    alert("Inserisci un numero da 1 a 50");
-    SCORE -= 50;
-  }
-
-  console.log(computerPicks);
-
-  //!processiamo i dati
-
-  if (computerPicks.includes(parseInt(numberInputEl.value))) {
-    lost = true;
-    title.innerHTML = "HAI PERSO!!";
-    title.style.color = "red";
-    title.style.fontSize = "3rem";
-  }
-
-  if (!lost) {
-    USERPICKS.push(numberInputEl.value);
-    title.innerHTML = "TI È ANDATA BENE...";
-    SCORE += 50;
-    scoreResultEl.innerHTML = SCORE;
-  }
 });
