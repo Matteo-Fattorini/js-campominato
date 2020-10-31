@@ -50,7 +50,7 @@ h3 {
   border: 1px solid var(--red);
   margin: 70px auto;
   width: 100%;
-
+  height: 100vh;
   position: relative;
   display: none;
   padding: 50px 0;
@@ -85,12 +85,12 @@ h3 {
 }
 
 .minebox {
-
   width: calc(100% / 10);
-  height: calc(100% / 10 );
+  height: calc(100% / 10);
   border: 3px solid black;
   background-color: grey;
 }
+
 
 .minebox:hover {
   cursor: pointer;
@@ -98,23 +98,20 @@ h3 {
 }
 
 .mineField {
+  padding-top: 100px;
   display: flex;
   flex-wrap: wrap;
-  height: 600px;
+  align-items: start;
+  justify-content: start;
+  align-content: start;
   width: 600px;
- 
+  height: 600px;
   margin: auto;
 }
 
 @media screen and (max-width: 1600px) {
   html {
     font-size: 0.5rem;
-  }
-
-  .mineField {
-    width: 100%;
-    margin: 0;
-    padding-top: 50px;
   }
 
   .scorebox {

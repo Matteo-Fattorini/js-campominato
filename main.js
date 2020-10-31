@@ -143,6 +143,7 @@ mediumDiffEl.addEventListener("click", function () {
   var minebox = document.getElementsByClassName("minebox");
   for (var i = 0; i < minebox.length; i++) {
     minebox[i].style.width = "calc(100% / 8)";
+    minebox[i].style.height = "calc(100% / 8)";
   }
   playGame();
   wrapperEl.style.display = "none";
@@ -159,10 +160,11 @@ mediumDiffEl.addEventListener("click", function () {
 
 hardDiffEl.addEventListener("click", function () {
   computerPicks = randomNumList(1, 50, PICKNUMB);
-  createMinebox(49);
+  createMinebox(48);
   var minebox = document.getElementsByClassName("minebox");
   for (var i = 0; i < minebox.length; i++) {
-    minebox[i].style.width = "calc(100% / 5)";
+    minebox[i].style.width = "calc(100% / 7)";
+    minebox[i].style.height = "calc(100% / 7)";
   }
   playGame();
   wrapperEl.style.display = "none";
