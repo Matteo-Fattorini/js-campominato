@@ -92,6 +92,7 @@ function createMinebox(n) {
 function playGame() {
   scoreResultEl.innerHTML = 0;
   mineClass = document.getElementsByClassName("minebox");
+
   for (var i = 0; i < mineClass.length; i++) {
     mineClass[i].addEventListener("click", function (event) {
       if (lost) {
@@ -122,6 +123,7 @@ function playGame() {
 easyDiffEl.addEventListener("click", function () {
   computerPicks = randomNumList(1, 100, PICKNUMB);
   createMinebox(99);
+
   playGame();
   wrapperEl.style.display = "none";
   scoreBoxEl.style.display = "block";
@@ -138,6 +140,10 @@ easyDiffEl.addEventListener("click", function () {
 mediumDiffEl.addEventListener("click", function () {
   computerPicks = randomNumList(1, 80, PICKNUMB);
   createMinebox(79);
+  var minebox = document.getElementsByClassName("minebox");
+  for (var i = 0; i < minebox.length; i++) {
+    minebox[i].style.width = "calc(100% / 8)";
+  }
   playGame();
   wrapperEl.style.display = "none";
   scoreBoxEl.style.display = "block";
@@ -154,6 +160,10 @@ mediumDiffEl.addEventListener("click", function () {
 hardDiffEl.addEventListener("click", function () {
   computerPicks = randomNumList(1, 50, PICKNUMB);
   createMinebox(49);
+  var minebox = document.getElementsByClassName("minebox");
+  for (var i = 0; i < minebox.length; i++) {
+    minebox[i].style.width = "calc(100% / 5)";
+  }
   playGame();
   wrapperEl.style.display = "none";
   scoreBoxEl.style.display = "block";
